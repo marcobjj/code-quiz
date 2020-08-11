@@ -8,28 +8,30 @@ questionObject1.choices = ["Numbers, Strings", "Other Arrays","Boolean", "All of
 questionObject1.answer = 3;
 
 var questionObject2 = {};
-questionObject1.question = "Commonly used data types do NOT Include:";
-questionObject1.choices = ["Alert", "Strings", "Boolean", "Numbers"];
-questionObject1.answer = 0;
+questionObject2.question = "Commonly used data types do NOT Include:";
+questionObject2.choices = ["Alert", "Strings", "Boolean", "Numbers"];
+questionObject2.answer = 0;
 
 var questionObject3 = {};
-questionObject1.question = "The condition in and if/else statement is enclosed with:";
-questionObject1.choices = ["Curly brackets", "Brackets","Comma", "Parenthesis"];
-questionObject1.answer = 3;
+questionObject3.question = "The condition in and if/else statement is enclosed with:";
+questionObject3.choices = ["Curly brackets", "Brackets","Comma", "Parenthesis"];
+questionObject3.answer = 3;
 
 var questionObject4 = {};
-questionObject1.question = "A very useful tool during development and debudding for printing out content to the debugger is:";
-questionObject1.choices = ["Terminal bash", "Javascript","Console.log", "For loops"];
-questionObject1.answer = 2;
+questionObject4.question = "A very useful tool during development and debudding for printing out content to the debugger is:";
+questionObject4.choices = ["Terminal bash", "Javascript","Console.log", "For loops"];
+questionObject4.answer = 2;
 
 var questionObject5 = {};
-questionObject1.question = "String values must be enclosed with _______ when being associated with variables.";
-questionObject1.choices = ["Brackets", "Quotes","Parenthesis", "Slashes"];
-questionObject1.answer = 1;
+questionObject5.question = "String values must be enclosed with _______ when being associated with variables.";
+questionObject5.choices = ["Brackets", "Quotes","Parenthesis", "Slashes"];
+questionObject5.answer = 1;
 
 
-var quizArray = [questionObject1, questionObject2,questionObject3,questionObject4,questionObject5];
+var quizArray = [questionObject1, questionObject2, questionObject3,questionObject4,questionObject5];
+
 var currentQuestion = 0;
+var correctAnswer = 0;
 
 
 var startQuiz = function (){
@@ -52,6 +54,10 @@ var addQuestion = function() {
     var questObj = quizArray[currentQuestion];
     var choices = questObj.choices;
 
+    console.log(questObj);
+
+    correctAnswer = questObj.answer;
+
     var h1 = quizQuestion.querySelector("h1");
     h1.textContent = questObj.question;
 
@@ -67,8 +73,8 @@ var addQuestion = function() {
 
         var id = i;
 
-        li.setAttribute("id", id); 
-       // l1.addEventListener("click",)
+        li.setAttribute("data-task-id", id); 
+
         quizList.appendChild(li);
 
     }
@@ -77,10 +83,45 @@ var addQuestion = function() {
 
 var clickHandler = function (event) {
 
-    alert(event.target.getAttribute("id"));
+    if(!event.target.hasAttribute("data-task-id")) return;
+
+    var answer = event.target.getAttribute("data-task-id");
+
+    validateAnswer(answer);
 
 
 }
+
+var validateAnswer = function (id) {
+
+if(id == correctAnswer) alert("Correct!");
+else alert("Wrong!");
+
+nextQuestion();
+
+}
+
+var nextQuestion = function (){
+
+    if(currentQuestion++ >= quizArray.length -1)
+    {
+        endQuiz();
+        return;
+
+    }
+
+    reset();
+    addQuestion();
+
+}
+
+var endQuiz = function (){
+
+alert("the end!");
+
+}
+
+startQuiz();
 
 quizList.addEventListener('click', clickHandler)
 
