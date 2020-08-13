@@ -153,7 +153,7 @@ var userScore = {
     score: totalScore
 }
 
-localStorage.setItem(id, JSON.stringify(userScore));
+window.localStorage.setItem(id, JSON.stringify(userScore));
 
 changeSlide("high-scores");
 fetchScores();
@@ -281,7 +281,7 @@ var clearScores = function ()
 {
 
 
-    localStorage.clear();
+    window.localStorage.clear();
     changeSlide("intro");
 }
 
@@ -315,7 +315,7 @@ changeSlide("scores");
 function getStorage() {
 
     var values = [],
-        keys = Object.keys(localStorage),
+        keys = Object.keys(window.localStorage),
         i = keys.length;
 
 
