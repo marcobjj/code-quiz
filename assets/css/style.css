@@ -119,3 +119,12 @@ color: pink;
     font-style: italic;
     color: #ccc;
 }
+
+@media only screen and (max-width: 900px) {
+
+    h1 {  font-size:24px }
+    h2 { font-size:20px}
+    ul li {font-size:10px}
+    section {width:400px}
+
+}
