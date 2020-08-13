@@ -55,6 +55,8 @@ reset();
 addQuestion();
 clearTimeAndScore();
 
+giveFeedback('');
+
 changeSlide("quiz");
 
 }
@@ -72,6 +74,7 @@ var reset = function(){
 
    if( quizList.hasChildNodes()  ) quizList.textContent = '';
 
+   
   
 
 
