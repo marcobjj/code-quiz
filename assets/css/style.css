@@ -13,7 +13,7 @@ height: 70px;
 
 section {
 
-    max-width:650px;
+    width:650px;
 }
 
 
@@ -105,4 +105,16 @@ color: pink;
 #time-display{
 
     float:right;
+}
+
+#result {
+
+    width:650px;
+    padding-top:10px;
+    margin-top:10px;
+    border-top: 1px solid #ccc;
+    font-weight: lighter;
+
+    font-style: italic;
+    color: #ccc;
 }

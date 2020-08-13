@@ -167,11 +167,13 @@ var changeSlide = function(slide)
     var scoreSlide = document.querySelector("#scores");
     var highScoresSlide = document.querySelector("#high-scores");
     var introSlide = document.querySelector("#intro");
+    var result = document.querySelector("#result");
 
     quizSlide.style.display = "none";
     scoreSlide.style.display = "none";
     highScoresSlide.style.display = "none";
     introSlide.style.display = "none";
+    result.style.display = "none";
 
     if(totalTime > 0)
     {
@@ -183,9 +185,11 @@ var changeSlide = function(slide)
     switch (slide) {
         case "quiz":
             quizSlide.style.display = "inline";
+            result.style.display = "inline";
             break;
         case "scores":
             scoreSlide.style.display = "inline";
+            result.style.display = "inline";
             break;
         case "high-scores":
             highScoresSlide.style.display = "inline";
