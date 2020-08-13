@@ -243,8 +243,8 @@ var fetchScores = function()
 
    for (var i = 0; i < scoresArrayLength; i++)
    {
-
-    scoresArray.push(JSON.parse(window.localStorage.getItem(i)));
+    var obj = JSON.parse(window.localStorage.getItem(i));
+    if (obj) scoresArray.push(obj);
    }
 
    scoresArray.sort(function(a, b) { 
