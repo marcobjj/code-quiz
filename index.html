@@ -11,7 +11,18 @@
 
 <body>
 
-    <section class="quiz">
+    <header>
+    <div id="view-scores">
+
+        View high scores
+    </div>
+    <div id="time-display">Timer:</div>
+
+    </header>
+
+    <div class="content">
+
+    <section id="quiz">
  
 
         <div id="question"> 
@@ -47,7 +58,7 @@
 
 
     </section>
-    <section class="scores">
+    <section id="scores">
         <h1>All Done!</h1>
         <div id="final-score">
             Your final score is:
@@ -56,7 +67,7 @@
         <form>
             <label for="initials">Enter Your Initials:</label>    
             <input name="initials" id="initials"/>
-            <input type="submit" value="Submit" id="submit-score">
+            <input type="submit" value="Submit" id="submit-score" class="btn">
         
 
         </form>
@@ -68,10 +79,26 @@
 
 
         </ul>
+        <div > 
+            <button class="btn" onclick="clearScores()">Clear High Scores</button> 
+
+            <button class="btn" onclick="changeSlide('intro')">Go Back</button>
+        
+        </div>
 
 
 
     </section>
+    <section id="intro">
+        <h1>
+            Coding Quiz Challenge
+        </h1>
+        <p>Try to answer the following code-related questions within the time limit.Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+
+        <input type="submit" value="Start Quiz" class="btn" id="start-button"> 
+
+    </section>
+    </div>
 
 
     <script src="./assets/js/script.js"></script>

@@ -4,6 +4,11 @@ var quizResult = document.querySelector("#result");
 var finalScore = document.querySelector("#final-score");
 var submitScore = document.querySelector("#submit-score");
 var userScore = document.querySelector("#user-scores");
+var timeDisplay = document.querySelector("#time-display");
+var viewHighScores = document.querySelector("#view-scores");
+var startBtn = document.querySelector("#start-button");
+
+
 
 
 var questionObject1 = {};
@@ -36,8 +41,8 @@ var quizArray = [questionObject1, questionObject2, questionObject3,questionObjec
 
 var currentQuestion = 0;
 var correctAnswer = 0;
-var totalScore = 0;
 var totalTime = 0;
+var totalScore = 0;
 
 var timeCount ;
 
@@ -50,13 +55,15 @@ reset();
 addQuestion();
 clearTimeAndScore();
 
+changeSlide("quiz");
+
 }
 
 var clearTimeAndScore = function ()
 {
 
-    totalScore = 0;
-    totalTime = 35000;
+   
+    totalTime = 75000;
     timeCount = setInterval(intervalHandler,1000);
 
 }
@@ -113,10 +120,20 @@ var clickHandler = function (event) {
 
 }
 
+var viewHighScoreHandler = function (event)
+{
+
+changeSlide("high-scores");
+fetchScores();
+
+}
+
 var intervalHandler = function ()
 {
 
     totalTime <= 0 ? endQuiz() : totalTime -= 1000;
+
+    timeDisplay.textContent = "Time: "+totalTime/1000;
 
 }
 
@@ -138,6 +155,49 @@ var userScore = {
 
 localStorage.setItem(id, JSON.stringify(userScore));
 
+changeSlide("high-scores");
+fetchScores();
+
+}
+
+
+var changeSlide = function(slide)
+{
+    var quizSlide = document.querySelector("#quiz");
+    var scoreSlide = document.querySelector("#scores");
+    var highScoresSlide = document.querySelector("#high-scores");
+    var introSlide = document.querySelector("#intro");
+
+    quizSlide.style.display = "none";
+    scoreSlide.style.display = "none";
+    highScoresSlide.style.display = "none";
+    introSlide.style.display = "none";
+
+    if(totalTime > 0)
+    {
+
+        slide = "quiz";
+    }
+    
+
+    switch (slide) {
+        case "quiz":
+            quizSlide.style.display = "inline";
+            break;
+        case "scores":
+            scoreSlide.style.display = "inline";
+            break;
+        case "high-scores":
+            highScoresSlide.style.display = "inline";
+            break;
+        case "intro":
+            introSlide.style.display = "flex";
+            break;
+
+
+    }
+    
+
 }
 
 var validateAnswer = function (id) {
@@ -151,7 +211,7 @@ nextQuestion();
 
 var correct = function ()
 {
-  totalScore += 20;
+ 
   giveFeedback("Correct!");
    
 }
@@ -208,11 +268,17 @@ var printScores = function (scoresArray){
 
         userScore.appendChild(li);
 
-
-       // console.log(scoresArray[i].name +" - "+scoresArray[i].score);
     }
 
 
+}
+
+var clearScores = function ()
+{
+
+
+    localStorage.clear();
+    changeSlide("intro");
 }
 
 var nextQuestion = function (){
@@ -231,8 +297,13 @@ var nextQuestion = function (){
 
 var endQuiz = function (){
 
+totalScore = totalTime/1000;
+totalTime = 0;
+
 finalScore.textContent = "Your final score is: "+totalScore;
+
 clearInterval(timeCount);
+changeSlide("scores");
 
 }
 
@@ -243,15 +314,16 @@ function getStorage() {
         keys = Object.keys(localStorage),
         i = keys.length;
 
-  //  while ( i-- ) {
-  //      values.push( localStorage.getItem(keys[i]) );
-  //  }
+
 
    return i
 }
 
-startQuiz();
 
-quizList.addEventListener('click', clickHandler)
-submitScore.addEventListener('click', submitScoreHandler)
+changeSlide("intro");
+
+startBtn.addEventListener('click', startQuiz)
+quizList.addEventListener('click', clickHandler);
+submitScore.addEventListener('click', submitScoreHandler);
+viewHighScores.addEventListener('click', viewHighScoreHandler);
 
